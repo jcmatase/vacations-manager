@@ -11,43 +11,45 @@ import styles from '../css/App.css';
 export default class App extends React.Component {
 constructor() {
     super();
-  this.state = {selectedMonth:'All', selectedYear: 2016, data: [], activeTab:2016};
+    this.state = {selectedMonth:'All', selectedYear: 2016, data: [], activeTab:2016};
     this.getData = this.getData.bind(this);
-  }
+}
+
 componentWillReceiveProps(nextProps) {
-    if(nextProps.history.location.search){
+  if(nextProps.history.location.search){
     var search = nextProps.history.location.search;
     search = search.substring(1);
     var searchObj = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
     this.setState({activeTab: parseInt(searchObj.year)});
     this.setState({selectedYear: searchObj.year});
     this.setState({selectedMonth: searchObj.month});
-
-
-this.getData(this, searchObj.year, searchObj.month);
-  }else{
-      this.getData(this, 2016, 'All');
-    }
+    this.getData(this, searchObj.year, searchObj.month);
   }
-componentDidMount(){
+  else{
     this.getData(this, 2016, 'All');
   }
+}
+
+componentDidMount() {
+  this.getData(this, 2016, 'All');
+}
+
 handleSelect(selectedTab) {
-     this.setState({
-       activeTab: selectedTab,
-       selectedYear: selectedTab
-     });
-  }
-getData(ev, year, month){
-    axios.get('http://localhost:8080/expense/'+year+'/'+month)
-      .then(function(response) {
-        ev.setState({data: response.data});
-        ev.setState({selectedYear: parseInt(year)});
-        ev.setState({selectedMonth: month});
-      });
+  this.setState({
+    activeTab: selectedTab,
+    selectedYear: selectedTab
+  });
+}
 
+getData(ev, year, month) {
+  axios.get('http://localhost:8080/expense/'+year+'/'+month)
+    .then(function(response) {
+      ev.setState({data: response.data});
+      ev.setState({selectedYear: parseInt(year)});
+      ev.setState({selectedMonth: month});
+    });
+}
 
-  }
 render() {
     return (
       <div>
@@ -61,7 +63,15 @@ render() {
         <Add selectedMonth={this.state.selectedMonth} selectedYear={this.state.selectedYear} />
         <table>
           <thead>
-            <tr><th></th><th className='desc-col'>Description</th><th className='button-col'>Amount</th><th className='button-col'>Month</th><th className='button-col'>Year</th><th className='button-col'>Update</th><th className='button-col'>Delete</th></tr>
+            <tr>
+              <th></th>
+              <th className='desc-col'>Description</th>
+              <th className='button-col'>Amount</th>
+              <th className='button-col'>Month</th>
+              <th className='button-col'>Year</th>
+              <th className='button-col'>Update</th>
+              <th className='button-col'>Delete</th>
+            </tr>
           </thead>
           <tbody>
             {
@@ -69,8 +79,8 @@ render() {
                 return  <tr><td className='counterCell'></td><td className='desc-col'>{exp.description}</td><td className='button-col'>{exp.amount}</td><td className='button-col'>{exp.month}</td><td className='button-col'>{exp.year}</td><td className='button-col'><Update expense={exp}/></td><td className='button-col'><Delete expense={exp} /></td></tr>
               })
             }
-            </tbody>
-</table>
+          </tbody>
+        </table>
       </div>
     );
   }
