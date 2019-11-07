@@ -35,10 +35,12 @@ componentDidMount() {
 }
 
 handleSelect(selectedTab) {
+  /*
   this.setState({
     activeTab: selectedTab,
     selectedYear: selectedTab
   });
+  */
 }
 
 getData(ev, year, month) {
