@@ -76,7 +76,7 @@ render() {
           <tbody>
             {
               this.state.data.map((exp) => {
-                return  <tr>
+                return  <tr key={exp.id}>
                           <td className='counterCell'></td>
                           <td className='desc-col'>{exp.description}</td>
                           <td className='button-col'>{exp.amount}</td>
