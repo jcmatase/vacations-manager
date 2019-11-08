@@ -3,7 +3,7 @@ import axios from 'axios';
 import Add from './Add';
 import Update from './Update';
 import Delete from './Delete';
-import { Tab, Tabs } from 'react-bootstrap';
+import { Tab, Tabs, Table } from 'react-bootstrap';
 import YearTabsRouter from './tabs/yearTabsRouter';
 import MonthTabs from './tabs/monthTabs';
 import styles from '../css/App.css';
@@ -63,7 +63,7 @@ render() {
           <Tab eventKey={2020} title={<YearTabsRouter year='2020'/>}><MonthTabs year='2020' monthlyActiveTab={this.state.selectedMonth}/></Tab>
         </Tabs>
         <Add selectedMonth={this.state.selectedMonth} selectedYear={this.state.selectedYear} />
-        <table>
+        <Table striped bordered hover size="sm">
           <thead>
             <tr>
               <th></th>
@@ -90,7 +90,7 @@ render() {
               })
             }
           </tbody>
-        </table>
+        </Table>
       </div>
     );
   }
