@@ -2,17 +2,17 @@ package com.expenseManager.ExpenseManagerAPI.service;
 
 import java.util.List;
 
-import com.expenseManager.ExpenseManagerAPI.domain.Expense;
+import com.expenseManager.ExpenseManagerAPI.domain.Vacation;
 
 public interface ExpenseService {
 	
-	List<Expense> findAll();
+	List<Vacation> findAll();
 	
-	List<Expense> findByMonthAndYear(String month, int year);
+	List<Vacation> findByMonthAndYear(String month, int year);
 	
-	List<Expense> findByYear(int year);
+	List<Vacation> findByYear(int year);
 	
-	void saveOrUpdateExpense(Expense expense);
+	void saveOrUpdateExpense(Vacation vacation);
 	
 	void deleteExpense(String id);
 

@@ -1,6 +1,6 @@
 /Users/jeancarlo/dev/projects/vacations-manager/back-end/src/main/java/com/expenseManager/ExpenseManagerAPI/service/ExpenseServiceImpl.java
 /Users/jeancarlo/dev/projects/vacations-manager/back-end/src/main/java/com/expenseManager/ExpenseManagerAPI/repositories/ExpenseRepository.java
-/Users/jeancarlo/dev/projects/vacations-manager/back-end/src/main/java/com/expenseManager/ExpenseManagerAPI/domain/Expense.java
 /Users/jeancarlo/dev/projects/vacations-manager/back-end/src/main/java/com/expenseManager/ExpenseManagerAPI/controller/ExpenseController.java
 /Users/jeancarlo/dev/projects/vacations-manager/back-end/src/main/java/com/expenseManager/ExpenseManagerAPI/service/ExpenseService.java
+/Users/jeancarlo/dev/projects/vacations-manager/back-end/src/main/java/com/expenseManager/ExpenseManagerAPI/domain/Vacation.java
 /Users/jeancarlo/dev/projects/vacations-manager/back-end/src/main/java/com/expenseManager/ExpenseManagerAPI/ExpenseManagerApiApplication.java

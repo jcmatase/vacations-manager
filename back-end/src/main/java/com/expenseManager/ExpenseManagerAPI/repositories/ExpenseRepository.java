@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.expenseManager.ExpenseManagerAPI.domain.Expense;
+import com.expenseManager.ExpenseManagerAPI.domain.Vacation;
 
-public interface ExpenseRepository extends MongoRepository<Expense, String>{
+public interface ExpenseRepository extends MongoRepository<Vacation, String>{
 
-	List<Expense> findByMonthAndYear(String month, int year);
+	List<Vacation> findByMonthAndYear(String month, int year);
 	
-	List<Expense> findByYear(int year);
+	List<Vacation> findByYear(int year);
 
 }
