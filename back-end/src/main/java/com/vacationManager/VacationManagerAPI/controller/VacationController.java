@@ -1,4 +1,4 @@
-package com.expenseManager.ExpenseManagerAPI.controller;
+package com.vacationManager.VacationManagerAPI.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,21 +16,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.expenseManager.ExpenseManagerAPI.domain.Vacation;
-import com.expenseManager.ExpenseManagerAPI.service.ExpenseService;
+import com.vacationManager.VacationManagerAPI.domain.Vacation;
+import com.vacationManager.VacationManagerAPI.service.VacationService;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/expense")
-public class ExpenseController {
+public class VacationController {
 
 	@Autowired
-	ExpenseService expenseService;
+	VacationService vacationService;
 	
 	
 	@GetMapping
 	public ResponseEntity<?> getAll() {
-		List<Vacation> result = expenseService.findAll();
+		List<Vacation> result = vacationService.findAll();
 		return new ResponseEntity(result, HttpStatus.OK);
 	}
 	
@@ -38,22 +38,22 @@ public class ExpenseController {
 	public ResponseEntity<?> getByMonthYear(@PathVariable("year") int year, @PathVariable("month") String month) {
 		List<Vacation> result = new ArrayList<>();
 		if("All".equals(month)) {
-			result = expenseService.findByYear(year);
+			result = vacationService.findByYear(year);
 		} else {
-			result = expenseService.findByMonthAndYear(month, year);			
+			result = vacationService.findByMonthAndYear(month, year);
 		}
 		return new ResponseEntity(result, HttpStatus.OK);
 	}
 	
 	@PostMapping
-	public ResponseEntity<?> addorUpdateExpense(@RequestBody Vacation vacation) {
-		expenseService.saveOrUpdateExpense(vacation);
-		return new ResponseEntity("Expense added succcessfully", HttpStatus.OK);
+	public ResponseEntity<?> addorUpdateVacation(@RequestBody Vacation vacation) {
+		vacationService.saveOrUpdateVacation(vacation);
+		return new ResponseEntity("Vacation added succcessfully", HttpStatus.OK);
 	}
 	
 	@DeleteMapping
-	public void deleteExpense(@RequestParam("id") String id) {
-		expenseService.deleteExpense(id);
+	public void deleteVacation(@RequestParam("id") String id) {
+		vacationService.deleteVacation(id);
 	}
 	
 

@@ -1,4 +1,4 @@
-package com.expenseManager.ExpenseManagerAPI.domain;
+package com.vacationManager.VacationManagerAPI.domain;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

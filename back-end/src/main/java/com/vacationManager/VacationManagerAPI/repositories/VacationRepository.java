@@ -1,12 +1,12 @@
-package com.expenseManager.ExpenseManagerAPI.repositories;
+package com.vacationManager.VacationManagerAPI.repositories;
 
 import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.expenseManager.ExpenseManagerAPI.domain.Vacation;
+import com.vacationManager.VacationManagerAPI.domain.Vacation;
 
-public interface ExpenseRepository extends MongoRepository<Vacation, String>{
+public interface VacationRepository extends MongoRepository<Vacation, String>{
 
 	List<Vacation> findByMonthAndYear(String month, int year);
 	

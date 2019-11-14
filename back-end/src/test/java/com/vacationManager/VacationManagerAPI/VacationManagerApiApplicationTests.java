@@ -1,4 +1,4 @@
-package com.expenseManager.ExpenseManagerAPI;
+package com.vacationManager.VacationManagerAPI;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ExpenseManagerApiApplicationTests {
+public class VacationManagerApiApplicationTests {
 
 	@Test
 	public void contextLoads() {

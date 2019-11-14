@@ -1,1 +1,2 @@
-com/expenseManager/ExpenseManagerAPI/ExpenseManagerApiApplication.class
+com/expenseManager/ExpenseManagerAPI/controller/VacationController.class
+com/expenseManager/ExpenseManagerAPI/domain/Vacation.class
