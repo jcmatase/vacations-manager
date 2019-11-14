@@ -27,7 +27,7 @@ onClick(e){
      this.delete(this);
     }
 delete(e){
-    axios.delete('http://localhost:8080/expense',{
+    axios.delete('http://localhost:8080/vacations',{
         params: { id: e.state.id }
       })
       .then(function(response) {

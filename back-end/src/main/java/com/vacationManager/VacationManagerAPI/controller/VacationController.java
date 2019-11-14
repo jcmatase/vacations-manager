@@ -21,7 +21,7 @@ import com.vacationManager.VacationManagerAPI.service.VacationService;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/expense")
+@RequestMapping("/vacations")
 public class VacationController {
 
 	@Autowired
