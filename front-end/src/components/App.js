@@ -77,15 +77,15 @@ render() {
           </thead>
           <tbody>
             {
-              this.state.data.map((exp) => {
-                return  <tr key={exp.id}>
+              this.state.data.map((vacation) => {
+                return  <tr key={vacation.id}>
                           <td className='counterCell'></td>
-                          <td className='desc-col'>{exp.description}</td>
-                          <td className='button-col'>{exp.amount}</td>
-                          <td className='button-col'>{exp.month}</td>
-                          <td className='button-col'>{exp.year}</td>
-                          <td className='button-col'><Update expense={exp}/></td>
-                          <td className='button-col'><Delete expense={exp}/></td>
+                          <td className='desc-col'>{vacation.description}</td>
+                          <td className='button-col'>{vacation.amount}</td>
+                          <td className='button-col'>{vacation.month}</td>
+                          <td className='button-col'>{vacation.year}</td>
+                          <td className='button-col'><Update expense={vacation}/></td>
+                          <td className='button-col'><Delete expense={vacation}/></td>
                         </tr>
               })
             }
