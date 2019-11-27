@@ -67,7 +67,7 @@ render() {
           <thead>
             <tr>
               <th></th>
-              <th className='desc-col'>Description</th>
+              <th className='desc-col'>Reason</th>
               <th className='button-col'>Amount</th>
               <th className='button-col'>Month</th>
               <th className='button-col'>Year</th>
@@ -80,7 +80,7 @@ render() {
               this.state.data.map((vacation) => {
                 return  <tr key={vacation.id}>
                           <td className='counterCell'></td>
-                          <td className='desc-col'>{vacation.description}</td>
+                          <td className='desc-col'>{vacation.reason}</td>
                           <td className='button-col'>{vacation.amount}</td>
                           <td className='button-col'>{vacation.month}</td>
                           <td className='button-col'>{vacation.year}</td>

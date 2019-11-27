@@ -7,7 +7,7 @@ class Add extends React.Component {
 constructor() {
       super();
 this.state = {
-        description: '',
+        reason: '',
         amount: '',
         month: '',
         year: '',
@@ -29,7 +29,7 @@ openModal() {
 closeModal() {
       this.setState({
         modalIsOpen: false,
-        description: '',
+        reason: '',
         amount: '',
         month: 'Jan',
         year: 2016,
@@ -83,7 +83,7 @@ onClick(e) {
     }
 insertNewExpense(e) {
     var expense = {
-      description: e.state.description,
+      reason: e.state.reason,
       amount: e.state.amount,
       month: e.state.month,
       year: e.state.year
@@ -95,9 +95,9 @@ insertNewExpense(e) {
       });
     }
 handleTextChange(e) {
-      if (e.target.name === "description") {
+      if (e.target.name === "reason") {
         this.setState({
-          description: e.target.value
+          reason: e.target.value
         });
       }
 if (e.target.name === "amount") {
@@ -120,7 +120,7 @@ render() {
        <Button bsStyle="danger" size="mini" onClick={this.closeModal}><span className="closebtn glyphicon glyphicon-remove"></span></Button>
       </Link><br/>
 <fieldset>
-       <label for="description">Description:</label><input type="text" id="description" name="description" value={this.state.description} onChange={this.handleTextChange}></input>
+       <label for="reason">reason:</label><input type="text" id="reason" name="reason" value={this.state.reason} onChange={this.handleTextChange}></input>
        <label for="amount">Amount:</label><input type="number" id="amount" name="amount" value={this.state.amount} onChange={this.handleTextChange}></input>
        <label for="month">Month:</label><select id="month" name="month" value={this.state.month} onChange={this.handleSelectChange}>
             <option value="Jan" id="Jan">January</option>

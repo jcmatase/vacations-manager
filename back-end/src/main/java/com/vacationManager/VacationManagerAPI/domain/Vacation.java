@@ -8,7 +8,7 @@ public class Vacation {
 
 	@Id
 	String id;
-	String description;
+	String reason;
 	Integer amount;
 	String month;
 	int year;
@@ -19,11 +19,11 @@ public class Vacation {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getDescription() {
-		return description;
+	public String getReason() {
+		return reason;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setReason(String reason) {
+		this.reason = reason;
 	}
 	public Integer getAmount() {
 		return amount;
