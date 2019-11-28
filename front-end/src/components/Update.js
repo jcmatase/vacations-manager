@@ -10,7 +10,7 @@ class Update extends React.Component {
     this.state = {
       id: '',
       reason: '',
-      amount: '',
+      requestedDay: '',
       month: '',
       year: '',
       messageFromServer: '',
@@ -28,7 +28,7 @@ class Update extends React.Component {
     this.setState({
       id: this.props.expense.id,
       reason: this.props.expense.reason,
-      amount: this.props.expense.amount,
+      requestedDay: this.props.expense.requestedDay,
       month: this.props.expense.month,
       year: this.props.expense.year
     });
@@ -75,9 +75,9 @@ class Update extends React.Component {
         reason: e.target.value
       });
     }
-    if (e.target.name === "amount") {
+    if (e.target.name === "requestedDay") {
       this.setState({
-        amount: e.target.value
+        requestedDay: e.target.value
       });
     }
   }
@@ -90,7 +90,7 @@ class Update extends React.Component {
     var expense = {
       id: e.state.id,
       reason: e.state.reason,
-      amount: e.state.amount,
+      requestedDay: e.state.requestedDay,
       month: e.state.month,
       year: e.state.year
     }
@@ -114,8 +114,8 @@ class Update extends React.Component {
             <fieldset>
               <label for="reason">Reason:</label>
               <input type="text" id="reason" name="reason" value={this.state.reason} onChange={this.handleTextChange}></input>
-              <label for="amount">Amount:</label>
-              <input type="number" id="amount" name="amount" value={this.state.amount} onChange={this.handleTextChange}></input>
+              <label for="requestedDay">Day:</label>
+              <input type="number" id="requestedDay" name="requestedDay" value={this.state.requestedDay} onChange={this.handleTextChange}></input>
               <label for="month">Month:</label>
               <select id="month" name="month" value={this.state.month} onChange={this.handleSelectChange}>
                 <option value="Jan" id="Jan">January</option>

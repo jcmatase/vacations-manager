@@ -10,7 +10,7 @@ class Add extends React.Component {
     super();
     this.state = {
       reason: '',
-      amount: '',
+      requestedDay: '',
       month: '',
       year: '',
       messageFromServer: '',
@@ -34,7 +34,7 @@ class Add extends React.Component {
     this.setState({
       modalIsOpen: false,
       reason: '',
-      amount: '',
+      requestedDay: '',
       month: 'Jan',
       year: 2016,
       messageFromServer: ''
@@ -93,7 +93,7 @@ class Add extends React.Component {
   insertNewExpense(e) {
     var expense = {
       reason: e.state.reason,
-      amount: e.state.amount,
+      requestedDay: e.state.requestedDay,
       month: e.state.month,
       year: e.state.year
     }
@@ -110,9 +110,9 @@ class Add extends React.Component {
         reason: e.target.value
       });
     }
-    if (e.target.name === "amount") {
+    if (e.target.name === "requestedDay") {
       this.setState({
-        amount: e.target.value
+        requestedDay: e.target.value
       });
     }
   }
@@ -132,8 +132,7 @@ class Add extends React.Component {
             </Link>
             <br/>
             <fieldset>
-              <label for="reason">reason:</label><input type="text" id="reason" name="reason" value={this.state.reason} onChange={this.handleTextChange}></input>
-              <label for="amount">Amount:</label><input type="number" id="amount" name="amount" value={this.state.amount} onChange={this.handleTextChange}></input>
+              <label for="requestedDay">Day:</label><input type="text" id="requestedDay" name="requestedDay" value={this.state.requestedDay} onChange={this.handleTextChange}></input>
               <label for="month">Month:</label>
               <select id="month" name="month" value={this.state.month} onChange={this.handleSelectChange}>
                 <option value="Jan" id="Jan">January</option>
@@ -158,10 +157,11 @@ class Add extends React.Component {
                 <option value="2019" id="19">2019</option>
                 <option value="2020" id="20">2020</option>
               </select>
+              <label for="reason">Reason:</label><input type="text" id="reason" name="reason" value={this.state.reason} onChange={this.handleTextChange}></input>
             </fieldset>
             <div className='button-center'>
               <br/>
-              <Button bsStyle="success" size="small" onClick={this.onClick}>Add New Expense</Button>
+              <Button bsStyle="success" size="small" onClick={this.onClick}>Submit</Button>
             </div>
           </Modal>
         </div>

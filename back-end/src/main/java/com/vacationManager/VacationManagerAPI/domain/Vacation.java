@@ -9,7 +9,7 @@ public class Vacation {
 	@Id
 	String id;
 	String reason;
-	Integer amount;
+	String requestedDay;
 	String month;
 	int year;
 	
@@ -25,12 +25,10 @@ public class Vacation {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-	public Integer getAmount() {
-		return amount;
+	public String getRequestedDay() {
+		return requestedDay;
 	}
-	public void setAmount(Integer amount) {
-		this.amount = amount;
-	}
+	public void setRequestedDay(String requestedDay) { this.requestedDay = requestedDay; }
 	public String getMonth() {
 		return month;
 	}

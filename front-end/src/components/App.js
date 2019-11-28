@@ -68,7 +68,7 @@ render() {
             <tr>
               <th></th>
               <th className='desc-col'>Reason</th>
-              <th className='button-col'>Amount</th>
+              <th className='button-col'>Day</th>
               <th className='button-col'>Month</th>
               <th className='button-col'>Year</th>
               <th className='button-col'>Update</th>
@@ -81,7 +81,7 @@ render() {
                 return  <tr key={vacation.id}>
                           <td className='counterCell'></td>
                           <td className='desc-col'>{vacation.reason}</td>
-                          <td className='button-col'>{vacation.amount}</td>
+                          <td className='button-col'>{vacation.requestedDay}</td>
                           <td className='button-col'>{vacation.month}</td>
                           <td className='button-col'>{vacation.year}</td>
                           <td className='button-col'><Update expense={vacation}/></td>
