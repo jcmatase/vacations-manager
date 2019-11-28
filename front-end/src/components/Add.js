@@ -132,7 +132,7 @@ class Add extends React.Component {
             </Link>
             <br/>
             <fieldset>
-              <label for="requestedDay">Day:</label><input type="text" id="requestedDay" name="requestedDay" value={this.state.requestedDay} onChange={this.handleTextChange}></input>
+              <label for="requestedDay">Day:</label><input type="number" id="requestedDay" name="requestedDay" value={this.state.requestedDay} onChange={this.handleTextChange}></input>
               <label for="month">Month:</label>
               <select id="month" name="month" value={this.state.month} onChange={this.handleSelectChange}>
                 <option value="Jan" id="Jan">January</option>
