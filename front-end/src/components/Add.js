@@ -13,6 +13,7 @@ class Add extends React.Component {
       requestedDay: '',
       month: '',
       year: '',
+      status: '',
       messageFromServer: '',
       modalIsOpen: false
     }
@@ -37,6 +38,7 @@ class Add extends React.Component {
       requestedDay: '',
       month: 'Jan',
       year: 2016,
+      status: '',
       messageFromServer: ''
     });
   }
@@ -84,6 +86,11 @@ class Add extends React.Component {
         year: e.target.value
       });
     }
+    if (e.target.name === 'status') {
+      this.setState({
+        status: e.target.value
+      });
+    }    
   }
 
   onClick(e) {
@@ -95,7 +102,8 @@ class Add extends React.Component {
       reason: e.state.reason,
       requestedDay: e.state.requestedDay,
       month: e.state.month,
-      year: e.state.year
+      year: e.state.year,
+      status: 0
     }
     axios.post('http://localhost:8080/vacations', expense).then(function(response) {
       e.setState({

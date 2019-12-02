@@ -52,6 +52,24 @@ getData(ev, year, month) {
     });
 }
 
+getVacationStatus(status) {
+  if ( status === 0 ) {
+    return {"msj": "Pending", style: {'color': 'orange'} };
+  }
+  if ( status === 1 ) {
+    return {"msj": "Approved", style: {'color': 'green'} };
+  }
+  if ( status === 2 ) {
+    return {"msj": "In Review", style: {'color': 'orange'} };
+  }
+  if ( status === 3 ) {
+    return {"msj": "Denied", style: {'color': 'red'} };
+  }
+  else {
+    return {"msj": "", style: {} };
+  }  
+}
+
 render() {
     return (
       <div>
@@ -67,10 +85,11 @@ render() {
           <thead>
             <tr>
               <th></th>
-              <th className='desc-col'>Reason</th>
+              <th className='button-col'>Status</th>
               <th className='button-col'>Day</th>
               <th className='button-col'>Month</th>
               <th className='button-col'>Year</th>
+              <th className='desc-col'>Reason</th>
               <th className='button-col'>Update</th>
               <th className='button-col'>Delete</th>
             </tr>
@@ -80,10 +99,11 @@ render() {
               this.state.data.map((vacation) => {
                 return  <tr key={vacation.id}>
                           <td className='counterCell'></td>
-                          <td className='desc-col'>{vacation.reason}</td>
+                          <td className='button-col' style={this.getVacationStatus(vacation.status).style}>{this.getVacationStatus(vacation.status).msj}</td>
                           <td className='button-col'>{vacation.requestedDay}</td>
                           <td className='button-col'>{vacation.month}</td>
                           <td className='button-col'>{vacation.year}</td>
+                          <td className='desc-col'>{vacation.reason}</td>
                           <td className='button-col'><Update expense={vacation}/></td>
                           <td className='button-col'><Delete expense={vacation}/></td>
                         </tr>

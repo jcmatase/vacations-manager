@@ -12,6 +12,7 @@ public class Vacation {
 	String requestedDay;
 	String month;
 	int year;
+	int status;
 	
 	public String getId() {
 		return id;
@@ -19,22 +20,26 @@ public class Vacation {
 	public void setId(String id) {
 		this.id = id;
 	}
+
 	public String getReason() {
 		return reason;
 	}
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
+
 	public String getRequestedDay() {
 		return requestedDay;
 	}
 	public void setRequestedDay(String requestedDay) { this.requestedDay = requestedDay; }
+
 	public String getMonth() {
 		return month;
 	}
 	public void setMonth(String month) {
 		this.month = month;
 	}
+
 	public int getYear() {
 		return year;
 	}
@@ -42,4 +47,6 @@ public class Vacation {
 		this.year = year;
 	}
 
+	public int getStatus() { return status; }
+	public void setStatus(int status) { this.status = status; }
 }
