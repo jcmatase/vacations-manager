@@ -158,8 +158,8 @@ class Add extends React.Component {
               </select>
               <label for="year">Year:</label>
               <select id="year" name="year" value={this.state.year} onChange={this.handleSelectChange}>
-                <option value="2015" id="17">2015</option>
-                <option value="2016" id="17">2016</option>
+                <option value="2015" id="15">2015</option>
+                <option value="2016" id="16">2016</option>
                 <option value="2017" id="17">2017</option>
                 <option value="2018" id="18">2018</option>
                 <option value="2019" id="19">2019</option>

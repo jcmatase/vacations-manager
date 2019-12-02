@@ -13,6 +13,7 @@ class Update extends React.Component {
       requestedDay: '',
       month: '',
       year: '',
+      status: '',
       messageFromServer: '',
       modalIsOpen: false
     }
@@ -30,7 +31,8 @@ class Update extends React.Component {
       reason: this.props.expense.reason,
       requestedDay: this.props.expense.requestedDay,
       month: this.props.expense.month,
-      year: this.props.expense.year
+      year: this.props.expense.year,
+      status: this.props.expense.status
     });
   }
 
@@ -39,7 +41,8 @@ class Update extends React.Component {
       id: nextProps.expense.id,
       reason: nextProps.expense.reason,
       month:nextProps.expense.month,
-      year:nextProps.expense.year
+      year:nextProps.expense.year,
+      status:nextProps.expense.status
     })
   }
 
@@ -67,6 +70,11 @@ class Update extends React.Component {
         year: e.target.value
       });
     }
+    if (e.target.name === "status") {
+      this.setState({
+        status: e.target.value
+      });
+    }    
   }
 
   handleTextChange(e) {
@@ -92,7 +100,8 @@ class Update extends React.Component {
       reason: e.state.reason,
       requestedDay: e.state.requestedDay,
       month: e.state.month,
-      year: e.state.year
+      year: e.state.year,
+      status: e.state.status
     }
     axios.post('http://localhost:8080/vacations',expense).then(function(response) {
       e.setState({
@@ -112,8 +121,6 @@ class Update extends React.Component {
             </Link>
             <br/>
             <fieldset>
-              <label for="reason">Reason:</label>
-              <input type="text" id="reason" name="reason" value={this.state.reason} onChange={this.handleTextChange}></input>
               <label for="requestedDay">Day:</label>
               <input type="number" id="requestedDay" name="requestedDay" value={this.state.requestedDay} onChange={this.handleTextChange}></input>
               <label for="month">Month:</label>
@@ -140,6 +147,15 @@ class Update extends React.Component {
                 <option value="2019" id="19">2019</option>
                 <option value="2020" id="20">2020</option>
               </select>
+              <label for="status">Status:</label>
+              <select id="status" name="status" value={this.state.status} onChange={this.handleSelectChange}>
+                <option value="0" id="0">Pending</option>
+                <option value="1" id="1">Approved</option>
+                <option value="2" id="2">In Review</option>
+                <option value="3" id="3">Denied</option>
+              </select>              
+              <label for="reason">Reason:</label>
+              <input type="text" id="reason" name="reason" value={this.state.reason} onChange={this.handleTextChange}></input>
             </fieldset>
             <div className='button-center'>
               <br/>
