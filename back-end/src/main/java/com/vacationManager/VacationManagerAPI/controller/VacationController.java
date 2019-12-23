@@ -52,8 +52,9 @@ public class VacationController {
 	}
 	
 	@DeleteMapping
-	public void deleteVacation(@RequestParam("id") String id) {
+	public ResponseEntity<?> deleteVacation(@RequestParam("id") String id) {
 		vacationService.deleteVacation(id);
+		return new ResponseEntity("Vacation removed succcessfully", HttpStatus.OK);
 	}
 	
 

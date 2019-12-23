@@ -84,7 +84,7 @@ render() {
         <Table striped bordered hover size="sm">
           <thead>
             <tr>
-              <th></th>
+            <th className='button-col'></th>
               <th className='button-col'>Status</th>
               <th className='button-col'>Day</th>
               <th className='button-col'>Month</th>
@@ -104,8 +104,8 @@ render() {
                           <td className='button-col'>{vacation.month}</td>
                           <td className='button-col'>{vacation.year}</td>
                           <td className='desc-col'>{vacation.reason}</td>
-                          <td className='button-col'><Update expense={vacation}/></td>
-                          <td className='button-col'><Delete expense={vacation}/></td>
+                          <td className='button-col'><Update vacation={vacation}/></td>
+                          <td className='button-col'><Delete vacation={vacation}/></td>
                         </tr>
               })
             }

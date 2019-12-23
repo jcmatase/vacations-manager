@@ -27,22 +27,22 @@ class Update extends React.Component {
 
   componentDidMount() {
     this.setState({
-      id: this.props.expense.id,
-      reason: this.props.expense.reason,
-      requestedDay: this.props.expense.requestedDay,
-      month: this.props.expense.month,
-      year: this.props.expense.year,
-      status: this.props.expense.status
+      id: this.props.vacation.id,
+      reason: this.props.vacation.reason,
+      requestedDay: this.props.vacation.requestedDay,
+      month: this.props.vacation.month,
+      year: this.props.vacation.year,
+      status: this.props.vacation.status
     });
   }
 
   componentWillReceiveProps(nextProps){
     this.setState({
-      id: nextProps.expense.id,
-      reason: nextProps.expense.reason,
-      month:nextProps.expense.month,
-      year:nextProps.expense.year,
-      status:nextProps.expense.status
+      id: nextProps.vacation.id,
+      reason: nextProps.vacation.reason,
+      month:nextProps.vacation.month,
+      year:nextProps.vacation.year,
+      status:nextProps.vacation.status
     })
   }
 
@@ -95,7 +95,7 @@ class Update extends React.Component {
   }
 
   update(e) {
-    var expense = {
+    var vacation = {
       id: e.state.id,
       reason: e.state.reason,
       requestedDay: e.state.requestedDay,
@@ -103,7 +103,7 @@ class Update extends React.Component {
       year: e.state.year,
       status: e.state.status
     }
-    axios.post('http://localhost:8080/vacations',expense).then(function(response) {
+    axios.post('http://localhost:8080/vacations',vacation).then(function(response) {
       e.setState({
         messageFromServer: response.data
       });
@@ -115,7 +115,7 @@ class Update extends React.Component {
       return (
         <div>
           <Button bsStyle="warning" size="small" onClick={this.openModal}><span className="glyphicon glyphicon-edit"></span></Button>
-          <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} contentLabel="Add Expense" className="Modal">
+          <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} contentLabel="Add Vacation" className="Modal">
             <Link to={{pathname: '/', search: '?month='+this.state.month+'&year='+this.state.year }} style={{ textDecoration: 'none' }}>
               <Button bsStyle="danger" size="mini" onClick={this.closeModal}><span className="closebtn glyphicon glyphicon-remove"></span></Button>
             </Link>
@@ -169,7 +169,7 @@ class Update extends React.Component {
       return (
         <div>
           <Button bsStyle="warning" size="small" onClick={this.openModal}><span className="glyphicon glyphicon-edit"></span></Button>
-          <Modal isOpen={this.state.modalIsOpen} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeModal} contentLabel="Add Expense" className="Modal">
+          <Modal isOpen={this.state.modalIsOpen} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeModal} contentLabel="Add Vacation" className="Modal">
             <div className='button-center'>
               <h3>{this.state.messageFromServer}</h3>
               <Link to={{pathname: '/', search: '?month='+this.state.month+'&year='+this.state.year}} style={{ textDecoration: 'none' }}>

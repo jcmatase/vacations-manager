@@ -20,7 +20,7 @@ class Add extends React.Component {
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.onClick = this.onClick.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
-    this.insertNewExpense = this.insertNewExpense.bind(this);
+    this.insertNewVacation = this.insertNewVacation.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
@@ -94,18 +94,18 @@ class Add extends React.Component {
   }
 
   onClick(e) {
-    this.insertNewExpense(this);
+    this.insertNewVacation(this);
   }
 
-  insertNewExpense(e) {
-    var expense = {
+  insertNewVacation(e) {
+    var vacation = {
       reason: e.state.reason,
       requestedDay: e.state.requestedDay,
       month: e.state.month,
       year: e.state.year,
       status: 0
     }
-    axios.post('http://localhost:8080/vacations', expense).then(function(response) {
+    axios.post('http://localhost:8080/vacations', vacation).then(function(response) {
       e.setState({
         messageFromServer: response.data
       });
@@ -130,11 +130,7 @@ class Add extends React.Component {
       return (
         <div>
           <Button bsStyle="success" size="small" onClick={this.openModal}><span className="glyphicon glyphicon-plus"></span></Button>
-          <Modal
-            isOpen={this.state.modalIsOpen}
-            onRequestClose={this.closeModal}
-            contentLabel="Add Expense"
-            className="Modal">
+          <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} contentLabel="Add Vacation" className="Modal">
             <Link to={{pathname: '/', search: '?month='+this.state.month+'&year='+this.state.year }} style={{ textDecoration: 'none' }}>
               <Button bsStyle="danger" size="mini" onClick={this.closeModal}><span className="closebtn glyphicon glyphicon-remove"></span></Button>
             </Link>
@@ -179,7 +175,7 @@ class Add extends React.Component {
       return (
         <div>
           <Button bsStyle="success" size="small" onClick={this.openModal}><span className="glyphicon glyphicon-plus"></span></Button>
-          <Modal isOpen={this.state.modalIsOpen} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeModal} contentLabel="Add Expense" className="Modal">
+          <Modal isOpen={this.state.modalIsOpen} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeModal} contentLabel="Add Vacation" className="Modal">
             <div className='button-center'>
               <h3>{this.state.messageFromServer}</h3>
               <Link to={{pathname: '/', search: '?month='+this.state.month+'&year='+this.state.year}} style={{ textDecoration: 'none' }}>
