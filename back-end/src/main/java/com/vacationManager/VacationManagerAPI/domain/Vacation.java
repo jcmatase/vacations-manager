@@ -8,6 +8,8 @@ public class Vacation {
 
 	@Id
 	String id;
+	String startDate;
+	String endDate;
 	String reason;
 	String requestedDay;
 	String month;
@@ -19,6 +21,20 @@ public class Vacation {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 
 	public String getReason() {

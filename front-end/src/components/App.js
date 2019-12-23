@@ -70,6 +70,33 @@ getVacationStatus(status) {
   }  
 }
 
+displayReadableDate(pDate) {
+  if (pDate) {
+    var dateArray = pDate.split('T');
+    if (dateArray.length === 2) {
+      return dateArray[0];
+    }
+  }
+  else{
+    return "";
+  }
+}
+
+calculateRequestedDays(pStartDate, pEndDate) {
+  if (pStartDate && pEndDate) {
+    const startDateObj = new Date(pStartDate);
+    const endDateObj = new Date(pEndDate);
+    // To calculate the time difference of two dates 
+    var Difference_In_Time = endDateObj.getTime() - startDateObj.getTime(); 
+    // To calculate the no. of days between two dates 
+    var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+    return Difference_In_Days + 1;
+  }
+  else {
+    return "-";
+  }
+}
+
 render() {
     return (
       <div>
@@ -86,6 +113,9 @@ render() {
             <tr>
             <th className='button-col'></th>
               <th className='button-col'>Status</th>
+              <th className='button-col'>Start Date</th>
+              <th className='button-col'>End Date</th>
+              <th className='button-col'>Requested days</th>
               <th className='button-col'>Day</th>
               <th className='button-col'>Month</th>
               <th className='button-col'>Year</th>
@@ -100,6 +130,9 @@ render() {
                 return  <tr key={vacation.id}>
                           <td className='counterCell'></td>
                           <td className='button-col' style={this.getVacationStatus(vacation.status).style}>{this.getVacationStatus(vacation.status).msj}</td>
+                          <td className='button-col'>{this.displayReadableDate(vacation.startDate)}</td>
+                          <td className='button-col'>{this.displayReadableDate(vacation.endDate)}</td>
+                          <td className='button-col'>{this.calculateRequestedDays(vacation.startDate, vacation.endDate)}</td>
                           <td className='button-col'>{vacation.requestedDay}</td>
                           <td className='button-col'>{vacation.month}</td>
                           <td className='button-col'>{vacation.year}</td>

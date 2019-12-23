@@ -119,6 +119,8 @@ class Add extends React.Component {
   insertNewVacation(e) {
     var vacation = {
       reason: e.state.reason,
+      startDate: e.state.startDate,
+      endDate: e.state.endDate,
       requestedDay: e.state.requestedDay,
       month: e.state.month,
       year: e.state.year,
