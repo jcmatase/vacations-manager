@@ -10,9 +10,9 @@ import styles from '../css/App.css';
 
 export default class App extends React.Component {
 constructor() {
-    super();
-    this.state = {selectedMonth:'All', selectedYear: 2016, data: [], activeTab:2016};
-    this.getData = this.getData.bind(this);
+  super();
+  this.state = {selectedMonth:'All', selectedYear: 2016, data: [], activeTab:2016};
+  this.getData = this.getData.bind(this);
 }
 
 componentWillReceiveProps(nextProps) {
