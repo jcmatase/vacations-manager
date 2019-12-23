@@ -3,12 +3,17 @@ import {Button} from 'react-bootstrap';
 import Modal from 'react-modal';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 class Add extends React.Component {
 
   constructor() {
     super();
     this.state = {
+      startDate: new Date(),
+      endDate: new Date(),
       reason: '',
       requestedDay: '',
       month: '',
@@ -17,6 +22,8 @@ class Add extends React.Component {
       messageFromServer: '',
       modalIsOpen: false
     }
+    this.handleStartDateChange = this.handleStartDateChange.bind(this);
+    this.handleEndDateChange = this.handleEndDateChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.onClick = this.onClick.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
@@ -42,6 +49,18 @@ class Add extends React.Component {
       messageFromServer: ''
     });
   }
+
+  handleStartDateChange = date => {
+    this.setState({
+      startDate: date
+    });
+  };
+
+  handleEndDateChange = date => {
+    this.setState({
+      endDate: date
+    });
+  };
 
   componentDidMount() {
     if(this.props.selectedMonth === 'All'){
@@ -136,6 +155,10 @@ class Add extends React.Component {
             </Link>
             <br/>
             <fieldset>
+              <label for="startDate">Start Date:</label>
+              <DatePicker selected={this.state.startDate} onChange={this.handleStartDateChange}/>
+              <label for="endDate">End Date:</label>
+              <DatePicker selected={this.state.endDate} onChange={this.handleEndDateChange}/>
               <label for="requestedDay">Day:</label><input type="number" id="requestedDay" name="requestedDay" value={this.state.requestedDay} onChange={this.handleTextChange}></input>
               <label for="month">Month:</label>
               <select id="month" name="month" value={this.state.month} onChange={this.handleSelectChange}>
