@@ -3,12 +3,19 @@ import Modal from 'react-modal';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import {getDay, getMonth, getYear} from '../utils/utils';
 
 class Update extends React.Component {
   constructor() {
     super();
     this.state = {
       id: '',
+      createDate: new Date(),
+      startDate2: new Date(),
+      endDate: new Date(),
+      endDate2: new Date(),
       reason: '',
       requestedDay: '',
       month: '',
@@ -18,6 +25,8 @@ class Update extends React.Component {
       modalIsOpen: false
     }
     this.update = this.update.bind(this);
+    this.handleStartDateChange = this.handleStartDateChange.bind(this);
+    this.handleEndDateChange = this.handleEndDateChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.onClick = this.onClick.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
@@ -28,6 +37,11 @@ class Update extends React.Component {
   componentDidMount() {
     this.setState({
       id: this.props.vacation.id,
+      createDate: this.props.vacation.createDate,
+      startDate: this.props.vacation.startDate,
+      startDate2: this.setDateObject(this.props.vacation.startDate),
+      endDate: this.props.vacation.endDate,
+      endDate2: this.setDateObject(this.props.vacation.endDate),
       reason: this.props.vacation.reason,
       requestedDay: this.props.vacation.requestedDay,
       month: this.props.vacation.month,
@@ -39,11 +53,20 @@ class Update extends React.Component {
   componentWillReceiveProps(nextProps){
     this.setState({
       id: nextProps.vacation.id,
+      createDate: nextProps.vacation.createDate,
+      startDate: nextProps.vacation.startDate,
+      endDate: nextProps.vacation.endDate,
       reason: nextProps.vacation.reason,
+      requestedDay: nextProps.vacation.requestedDay,
       month:nextProps.vacation.month,
       year:nextProps.vacation.year,
       status:nextProps.vacation.status
     })
+  }
+
+  setDateObject(pDateObj) {
+    var newDateObj = new Date(pDateObj);
+    return newDateObj;
   }
 
   openModal() {
@@ -58,6 +81,28 @@ class Update extends React.Component {
       messageFromServer: ''
     });
   }
+
+  handleStartDateChange = date => {
+    this.setDateObject(this.state.createDate);
+    this.setState({
+      startDate2: date
+    });
+    this.setState({
+      requestedDay: getDay(date)
+    });
+    this.setState({
+      month: getMonth(date)
+    });
+    this.setState({
+      year: getYear(date)
+    });
+  };
+
+  handleEndDateChange = date => {
+    this.setState({
+      endDate2: date
+    });
+  };  
 
   handleSelectChange(e) {
     if (e.target.name === "month") {
@@ -83,11 +128,6 @@ class Update extends React.Component {
         reason: e.target.value
       });
     }
-    if (e.target.name === "requestedDay") {
-      this.setState({
-        requestedDay: e.target.value
-      });
-    }
   }
 
   onClick(e) {
@@ -97,6 +137,9 @@ class Update extends React.Component {
   update(e) {
     var vacation = {
       id: e.state.id,
+      createDate: e.state.createDate,
+      startDate: this.state.startDate2,
+      endDate: this.state.sendDate2,
       reason: e.state.reason,
       requestedDay: e.state.requestedDay,
       month: e.state.month,
@@ -121,39 +164,17 @@ class Update extends React.Component {
             </Link>
             <br/>
             <fieldset>
-              <label for="requestedDay">Day:</label>
-              <input type="number" id="requestedDay" name="requestedDay" value={this.state.requestedDay} onChange={this.handleTextChange}></input>
-              <label for="month">Month:</label>
-              <select id="month" name="month" value={this.state.month} onChange={this.handleSelectChange}>
-                <option value="Jan" id="Jan">January</option>
-                <option value="Feb" id="Feb">Febrary</option>
-                <option value="Mar" id="Mar">March</option>
-                <option value="Apr" id="Apr">April</option>
-                <option value="May" id="May">May</option>
-                <option value="Jun" id="Jun">June</option>
-                <option value="Jul" id="Jul">July</option>
-                <option value="Aug" id="Aug">August</option>
-                <option value="Sep" id="Sep">September</option>
-                <option value="Oct" id="Oct">October</option>
-                <option value="Nov" id="Nov">November</option>
-                <option value="Dec" id="Dec">December</option>
-              </select>
-              <label for="year">Year:</label>
-              <select id="year" name="year" value={this.state.year} onChange={this.handleSelectChange}>
-                <option value="2015" id="17">2015</option>
-                <option value="2016" id="17">2016</option>
-                <option value="2017" id="17">2017</option>
-                <option value="2018" id="18">2018</option>
-                <option value="2019" id="19">2019</option>
-                <option value="2020" id="20">2020</option>
-              </select>
               <label for="status">Status:</label>
               <select id="status" name="status" value={this.state.status} onChange={this.handleSelectChange}>
                 <option value="0" id="0">Pending</option>
                 <option value="1" id="1">Approved</option>
                 <option value="2" id="2">In Review</option>
                 <option value="3" id="3">Denied</option>
-              </select>              
+              </select>
+              <label for="startDate">Start Date:</label>
+              <DatePicker selected={this.state.startDate2} onChange={this.handleStartDateChange}/>
+              <label for="endDate">End Date:</label>
+              <DatePicker selected={this.state.endDate2} onChange={this.handleEndDateChange}/>
               <label for="reason">Reason:</label>
               <input type="text" id="reason" name="reason" value={this.state.reason} onChange={this.handleTextChange}></input>
             </fieldset>
