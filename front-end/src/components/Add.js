@@ -7,6 +7,8 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 
+import {getDay, getMonth, getYear} from '../utils/utils';
+
 class Add extends React.Component {
 
   constructor() {
@@ -56,13 +58,13 @@ class Add extends React.Component {
       startDate: date
     });
     this.setState({
-      requestedDay: this.getDay(date)
+      requestedDay: getDay(date)
     });
     this.setState({
-      month: this.getMonth(date)
+      month: getMonth(date)
     });
     this.setState({
-      year: this.getYear(date)
+      year: getYear(date)
     });
   };
 
@@ -126,36 +128,15 @@ class Add extends React.Component {
     this.insertNewVacation(this);
   }
 
-  getDay(pDateObj) {
-    var ISODate = pDateObj.toISOString();
-    var date = ISODate.split('T');
-    date = date[0];
-    var splitDate = date.split('-');
-    return splitDate[2];
-  }
-
-  getMonth(pDateObj) {
-    const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    return MONTH_NAMES[pDateObj.getMonth()];
-  }
-
-  getYear(pDateObj) {
-    var ISODate = pDateObj.toISOString();
-    var date = ISODate.split('T');
-    date = date[0];
-    var splitDate = date.split('-');
-    return splitDate[0];
-  }
-
   insertNewVacation(e) {
     var vacation = {
       reason: e.state.reason,
       createDate: new Date(),
       startDate: e.state.startDate,
       endDate: e.state.endDate,
-      requestedDay: this.getDay(e.state.startDate),
-      month: this.getMonth(e.state.startDate),
-      year: this.getYear(e.state.startDate),
+      requestedDay: getDay(e.state.startDate),
+      month: getMonth(e.state.startDate),
+      year: getYear(e.state.startDate),
       status: 0
     }
     axios.post('http://localhost:8080/vacations', vacation).then(function(response) {
