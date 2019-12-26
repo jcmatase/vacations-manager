@@ -11,7 +11,7 @@ import styles from '../css/App.css';
 export default class App extends React.Component {
 constructor() {
   super();
-  this.state = {selectedMonth:'All', selectedYear: 2018, data: [], activeTab:2018};
+  this.state = {selectedMonth:'All', selectedYear: this.getCurrentYear(), data: [], activeTab: this.getCurrentYear()};
   this.getData = this.getData.bind(this);
 }
 
@@ -26,12 +26,17 @@ componentWillReceiveProps(nextProps) {
     this.getData(this, searchObj.year, searchObj.month);
   }
   else{
-    this.getData(this, 2018, 'All');
+    this.getData(this, this.getCurrentYear(), 'All');
   }
 }
 
+getCurrentYear() {
+  var currentDate = new Date();
+  return currentDate.getYear() + 1900;
+}
+
 componentDidMount() {
-  this.getData(this, 2018, 'All');
+  this.getData(this, this.getCurrentYear(), 'All');
 }
 
 handleSelect(selectedTab) {
@@ -111,7 +116,7 @@ render() {
             <tr>
             <th className='button-col'></th>
               <th className='button-col'>Status</th>
-              <th className='button-col'>Create Date</th>
+              <th className='button-col'>Created on</th>
               <th className='button-col'>Start Date</th>
               <th className='button-col'>End Date</th>
               <th className='button-col'>Requested days</th>

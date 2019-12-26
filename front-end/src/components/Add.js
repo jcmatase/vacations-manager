@@ -44,8 +44,8 @@ class Add extends React.Component {
       modalIsOpen: false,
       reason: '',
       requestedDay: '',
-      month: 'Jan',
-      year: 2018,
+      month: '',
+      year: '',
       status: '',
       messageFromServer: ''
     });
