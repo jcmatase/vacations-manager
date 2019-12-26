@@ -11,7 +11,7 @@ import styles from '../css/App.css';
 export default class App extends React.Component {
 constructor() {
   super();
-  this.state = {selectedMonth:'All', selectedYear: 2016, data: [], activeTab:2016};
+  this.state = {selectedMonth:'All', selectedYear: 2018, data: [], activeTab:2018};
   this.getData = this.getData.bind(this);
 }
 
@@ -26,12 +26,12 @@ componentWillReceiveProps(nextProps) {
     this.getData(this, searchObj.year, searchObj.month);
   }
   else{
-    this.getData(this, 2016, 'All');
+    this.getData(this, 2018, 'All');
   }
 }
 
 componentDidMount() {
-  this.getData(this, 2016, 'All');
+  this.getData(this, 2018, 'All');
 }
 
 handleSelect(selectedTab) {
@@ -101,8 +101,6 @@ render() {
     return (
       <div>
         <Tabs activeKey={this.state.activeTab} onSelect={this.handleSelect}>
-          <Tab eventKey={2016} title={<YearTabsRouter year='2016' />}><MonthTabs year='2016' monthlyActiveTab={this.state.selectedMonth}/></Tab>
-          <Tab eventKey={2017} title={<YearTabsRouter year='2017' />}><MonthTabs year='2017' monthlyActiveTab={this.state.selectedMonth}/></Tab>
           <Tab eventKey={2018} title={<YearTabsRouter year='2018'/>}><MonthTabs year='2018' monthlyActiveTab={this.state.selectedMonth}/></Tab>
           <Tab eventKey={2019} title={<YearTabsRouter year='2019'/>}><MonthTabs year='2019' monthlyActiveTab={this.state.selectedMonth}/></Tab>
           <Tab eventKey={2020} title={<YearTabsRouter year='2020'/>}><MonthTabs year='2020' monthlyActiveTab={this.state.selectedMonth}/></Tab>
@@ -113,12 +111,10 @@ render() {
             <tr>
             <th className='button-col'></th>
               <th className='button-col'>Status</th>
+              <th className='button-col'>Create Date</th>
               <th className='button-col'>Start Date</th>
               <th className='button-col'>End Date</th>
               <th className='button-col'>Requested days</th>
-              <th className='button-col'>Day</th>
-              <th className='button-col'>Month</th>
-              <th className='button-col'>Year</th>
               <th className='desc-col'>Reason</th>
               <th className='button-col'>Update</th>
               <th className='button-col'>Delete</th>
@@ -130,12 +126,10 @@ render() {
                 return  <tr key={vacation.id}>
                           <td className='counterCell'></td>
                           <td className='button-col' style={this.getVacationStatus(vacation.status).style}>{this.getVacationStatus(vacation.status).msj}</td>
+                          <td className='button-col'>{vacation.createDate}</td>
                           <td className='button-col'>{this.displayReadableDate(vacation.startDate)}</td>
                           <td className='button-col'>{this.displayReadableDate(vacation.endDate)}</td>
                           <td className='button-col'>{this.calculateRequestedDays(vacation.startDate, vacation.endDate)}</td>
-                          <td className='button-col'>{vacation.requestedDay}</td>
-                          <td className='button-col'>{vacation.month}</td>
-                          <td className='button-col'>{vacation.year}</td>
                           <td className='desc-col'>{vacation.reason}</td>
                           <td className='button-col'><Update vacation={vacation}/></td>
                           <td className='button-col'><Delete vacation={vacation}/></td>

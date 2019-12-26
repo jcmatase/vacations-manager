@@ -12,6 +12,7 @@ class Add extends React.Component {
   constructor() {
     super();
     this.state = {
+      createDate: new Date(),
       startDate: new Date(),
       endDate: new Date(),
       reason: '',
@@ -44,7 +45,7 @@ class Add extends React.Component {
       reason: '',
       requestedDay: '',
       month: 'Jan',
-      year: 2016,
+      year: 2018,
       status: '',
       messageFromServer: ''
     });
@@ -53,6 +54,15 @@ class Add extends React.Component {
   handleStartDateChange = date => {
     this.setState({
       startDate: date
+    });
+    this.setState({
+      requestedDay: this.getDay(date)
+    });
+    this.setState({
+      month: this.getMonth(date)
+    });
+    this.setState({
+      year: this.getYear(date)
     });
   };
 
@@ -116,14 +126,36 @@ class Add extends React.Component {
     this.insertNewVacation(this);
   }
 
+  getDay(pDateObj) {
+    var ISODate = pDateObj.toISOString();
+    var date = ISODate.split('T');
+    date = date[0];
+    var splitDate = date.split('-');
+    return splitDate[2];
+  }
+
+  getMonth(pDateObj) {
+    const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    return MONTH_NAMES[pDateObj.getMonth()];
+  }
+
+  getYear(pDateObj) {
+    var ISODate = pDateObj.toISOString();
+    var date = ISODate.split('T');
+    date = date[0];
+    var splitDate = date.split('-');
+    return splitDate[0];
+  }
+
   insertNewVacation(e) {
     var vacation = {
       reason: e.state.reason,
+      createDate: new Date(),
       startDate: e.state.startDate,
       endDate: e.state.endDate,
-      requestedDay: e.state.requestedDay,
-      month: e.state.month,
-      year: e.state.year,
+      requestedDay: this.getDay(e.state.startDate),
+      month: this.getMonth(e.state.startDate),
+      year: this.getYear(e.state.startDate),
       status: 0
     }
     axios.post('http://localhost:8080/vacations', vacation).then(function(response) {
@@ -161,31 +193,6 @@ class Add extends React.Component {
               <DatePicker selected={this.state.startDate} onChange={this.handleStartDateChange}/>
               <label for="endDate">End Date:</label>
               <DatePicker selected={this.state.endDate} onChange={this.handleEndDateChange}/>
-              <label for="requestedDay">Day:</label><input type="number" id="requestedDay" name="requestedDay" value={this.state.requestedDay} onChange={this.handleTextChange}></input>
-              <label for="month">Month:</label>
-              <select id="month" name="month" value={this.state.month} onChange={this.handleSelectChange}>
-                <option value="Jan" id="Jan">January</option>
-                <option value="Feb" id="Feb">Febrary</option>
-                <option value="Mar" id="Mar">March</option>
-                <option value="Apr" id="Apr">April</option>
-                <option value="May" id="May">May</option>
-                <option value="Jun" id="Jun">June</option>
-                <option value="Jul" id="Jul">July</option>
-                <option value="Aug" id="Aug">August</option>
-                <option value="Sep" id="Sep">September</option>
-                <option value="Oct" id="Oct">October</option>
-                <option value="Nov" id="Nov">November</option>
-                <option value="Dec" id="Dec">December</option>
-              </select>
-              <label for="year">Year:</label>
-              <select id="year" name="year" value={this.state.year} onChange={this.handleSelectChange}>
-                <option value="2015" id="15">2015</option>
-                <option value="2016" id="16">2016</option>
-                <option value="2017" id="17">2017</option>
-                <option value="2018" id="18">2018</option>
-                <option value="2019" id="19">2019</option>
-                <option value="2020" id="20">2020</option>
-              </select>
               <label for="reason">Reason:</label><input type="text" id="reason" name="reason" value={this.state.reason} onChange={this.handleTextChange}></input>
             </fieldset>
             <div className='button-center'>

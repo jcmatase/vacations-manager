@@ -8,6 +8,7 @@ public class Vacation {
 
 	@Id
 	String id;
+	String createDate;
 	String startDate;
 	String endDate;
 	String reason;
@@ -21,6 +22,13 @@ public class Vacation {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
 	}
 
 	public String getStartDate() {
