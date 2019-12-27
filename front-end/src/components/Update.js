@@ -139,7 +139,7 @@ class Update extends React.Component {
       id: e.state.id,
       createDate: e.state.createDate,
       startDate: this.state.startDate2,
-      endDate: this.state.sendDate2,
+      endDate: this.state.endDate2,
       reason: e.state.reason,
       requestedDay: e.state.requestedDay,
       month: e.state.month,
