@@ -55,12 +55,14 @@ class Update extends React.Component {
       id: nextProps.vacation.id,
       createDate: nextProps.vacation.createDate,
       startDate: nextProps.vacation.startDate,
+      startDate2: this.setDateObject(nextProps.vacation.startDate),
       endDate: nextProps.vacation.endDate,
+      endDate2: this.setDateObject(nextProps.vacation.endDate),
       reason: nextProps.vacation.reason,
       requestedDay: nextProps.vacation.requestedDay,
-      month:nextProps.vacation.month,
-      year:nextProps.vacation.year,
-      status:nextProps.vacation.status
+      month: nextProps.vacation.month,
+      year: nextProps.vacation.year,
+      status: nextProps.vacation.status
     })
   }
 
