@@ -8,10 +8,18 @@ import YearTabsRouter from './tabs/yearTabsRouter';
 import MonthTabs from './tabs/monthTabs';
 import styles from '../css/App.css';
 
+const GOOGLE_CLIENT_ID = "580137607617-00qj4evfoh62jiokg6lcu32gpfco93r6.apps.googleusercontent.com";
+
 export default class App extends React.Component {
 constructor() {
   super();
-  this.state = {selectedMonth:'All', selectedYear: this.getCurrentYear(), data: [], activeTab: this.getCurrentYear()};
+  this.state = {
+    selectedMonth:'All',
+    selectedYear: this.getCurrentYear(),
+    data: [],
+    activeTab: this.getCurrentYear(),
+    isSignedIn: false
+  };
   this.getData = this.getData.bind(this);
 }
 
@@ -35,7 +43,104 @@ getCurrentYear() {
   return currentDate.getYear() + 1900;
 }
 
+onSuccess() {
+  console.log('on success')
+  this.setState({
+    isSignedIn: true,
+    err: null
+  })
+}
+
+onLoginFailed(err) {
+  this.setState({
+    isSignedIn: false,
+    error: err,
+  })
+}
+
+getContent() {
+  if (this.state.isSignedIn) {
+    return (
+      <div>
+        <Tabs activeKey={this.state.activeTab} onSelect={this.handleSelect}>
+          <Tab eventKey={2019} title={<YearTabsRouter year='2019'/>}><MonthTabs year='2019' monthlyActiveTab={this.state.selectedMonth}/></Tab>
+          <Tab eventKey={2020} title={<YearTabsRouter year='2020'/>}><MonthTabs year='2020' monthlyActiveTab={this.state.selectedMonth}/></Tab>
+        </Tabs>
+        <Add selectedMonth={this.state.selectedMonth} selectedYear={this.state.selectedYear} />
+        <Table striped bordered hover size="sm">
+          <thead>
+            <tr>
+            <th className='button-col'></th>
+              <th className='button-col'>Status</th>
+              <th className='button-col'>Created on</th>
+              <th className='button-col'>Start Date</th>
+              <th className='button-col'>End Date</th>
+              <th className='button-col'>Requested days</th>
+              <th className='desc-col'>Reason</th>
+              <th className='button-col'>Update</th>
+              <th className='button-col'>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              this.state.data.map((vacation) => {
+                return  <tr key={vacation.id}>
+                          <td className='counterCell'></td>
+                          <td className='button-col' style={this.getVacationStatus(vacation.status).style}>{this.getVacationStatus(vacation.status).msj}</td>
+                          <td className='button-col'>{vacation.createDate}</td>
+                          <td className='button-col'>{this.displayReadableDate(vacation.startDate)}</td>
+                          <td className='button-col'>{this.displayReadableDate(vacation.endDate)}</td>
+                          <td className='button-col'>{this.calculateRequestedDays(vacation.startDate, vacation.endDate)}</td>
+                          <td className='desc-col'>{vacation.reason}</td>
+                          <td className='button-col'><Update vacation={vacation}/></td>
+                          <td className='button-col'><Delete vacation={vacation}/></td>
+                        </tr>
+              })
+            }
+          </tbody>
+        </Table>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <p>You are not signed in. Click here to sign in.</p>
+        <button id="loginButton">Login with Google</button>
+      </div>
+    )
+  } 
+}
+
 componentDidMount() {
+  const successCallback = this.onSuccess.bind(this);
+    
+  window.gapi.load('auth2', () => {
+    this.auth2 = window.gapi.auth2.init({
+      client_id: GOOGLE_CLIENT_ID
+    })
+
+    // this.auth2.attachClickHandler(document.querySelector('#loginButton'), {}, this.onLoginSuccessful.bind(this))
+
+    this.auth2.then(() => {
+      console.log('on init');
+      this.setState({
+        isSignedIn: this.auth2.isSignedIn.get(),
+      });
+    });
+  });    
+
+  window.gapi.load('signin2', function() {
+    // Method 3: render a sign in button
+    // using this method will show Signed In if the user is already signed in
+    var opts = {
+      width: 200,
+      height: 50,
+      client_id: GOOGLE_CLIENT_ID,
+      onsuccess: successCallback
+    }
+    window.gapi.signin2.render('loginButton', opts)
+  })
+
   this.getData(this, this.getCurrentYear(), 'All');
 }
 
@@ -103,46 +208,11 @@ calculateRequestedDays(pStartDate, pEndDate) {
 }
 
 render() {
-    return (
-      <div>
-        <Tabs activeKey={this.state.activeTab} onSelect={this.handleSelect}>
-          <Tab eventKey={2019} title={<YearTabsRouter year='2019'/>}><MonthTabs year='2019' monthlyActiveTab={this.state.selectedMonth}/></Tab>
-          <Tab eventKey={2020} title={<YearTabsRouter year='2020'/>}><MonthTabs year='2020' monthlyActiveTab={this.state.selectedMonth}/></Tab>
-        </Tabs>
-        <Add selectedMonth={this.state.selectedMonth} selectedYear={this.state.selectedYear} />
-        <Table striped bordered hover size="sm">
-          <thead>
-            <tr>
-            <th className='button-col'></th>
-              <th className='button-col'>Status</th>
-              <th className='button-col'>Created on</th>
-              <th className='button-col'>Start Date</th>
-              <th className='button-col'>End Date</th>
-              <th className='button-col'>Requested days</th>
-              <th className='desc-col'>Reason</th>
-              <th className='button-col'>Update</th>
-              <th className='button-col'>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              this.state.data.map((vacation) => {
-                return  <tr key={vacation.id}>
-                          <td className='counterCell'></td>
-                          <td className='button-col' style={this.getVacationStatus(vacation.status).style}>{this.getVacationStatus(vacation.status).msj}</td>
-                          <td className='button-col'>{vacation.createDate}</td>
-                          <td className='button-col'>{this.displayReadableDate(vacation.startDate)}</td>
-                          <td className='button-col'>{this.displayReadableDate(vacation.endDate)}</td>
-                          <td className='button-col'>{this.calculateRequestedDays(vacation.startDate, vacation.endDate)}</td>
-                          <td className='desc-col'>{vacation.reason}</td>
-                          <td className='button-col'><Update vacation={vacation}/></td>
-                          <td className='button-col'><Delete vacation={vacation}/></td>
-                        </tr>
-              })
-            }
-          </tbody>
-        </Table>
-      </div>
-    );
-  }
+  return (      
+    <div className="App">
+      {this.getContent()}
+    </div>
+  );
+}
+
 }
