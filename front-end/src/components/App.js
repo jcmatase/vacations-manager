@@ -104,8 +104,8 @@ getContent() {
   } else {
     return (
       <div>
-        <p>You are not signed in. Click here to sign in.</p>
-        <button id="loginButton">Login with Google</button>
+        <p className="loginText">You are not signed in. Click here to sign in.</p>
+        <button className="loginButton" id="loginButton">Login with Google</button>
       </div>
     )
   } 
@@ -118,8 +118,6 @@ componentDidMount() {
     this.auth2 = window.gapi.auth2.init({
       client_id: GOOGLE_CLIENT_ID
     })
-
-    // this.auth2.attachClickHandler(document.querySelector('#loginButton'), {}, this.onLoginSuccessful.bind(this))
 
     this.auth2.then(() => {
       console.log('on init');

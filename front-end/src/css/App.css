@@ -57,3 +57,12 @@ fieldset{
 .horizontal-aligment{
   text-align: center;
 }
+.loginButton{
+  margin-left: 15px;
+  padding: 0;
+  border: none;
+  background: none;
+}
+.loginText{
+  margin-left: 15px;
+}
