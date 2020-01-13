@@ -18,7 +18,8 @@ constructor() {
     selectedYear: this.getCurrentYear(),
     data: [],
     activeTab: this.getCurrentYear(),
-    isSignedIn: false
+    isSignedIn: false,
+    userProfile: {}
   };
   this.getData = this.getData.bind(this);
 }
@@ -44,7 +45,6 @@ getCurrentYear() {
 }
 
 onSuccess() {
-  console.log('on success')
   this.setState({
     isSignedIn: true,
     err: null
@@ -62,6 +62,10 @@ getContent() {
   if (this.state.isSignedIn) {
     return (
       <div>
+        <div id="User Info">
+          <h2>Welcome {this.state.userProfile.ig}</h2>
+          <h5>Available days: </h5>
+        </div>
         <Tabs activeKey={this.state.activeTab} onSelect={this.handleSelect}>
           <Tab eventKey={2019} title={<YearTabsRouter year='2019'/>}><MonthTabs year='2019' monthlyActiveTab={this.state.selectedMonth}/></Tab>
           <Tab eventKey={2020} title={<YearTabsRouter year='2020'/>}><MonthTabs year='2020' monthlyActiveTab={this.state.selectedMonth}/></Tab>
@@ -119,10 +123,10 @@ componentDidMount() {
       client_id: GOOGLE_CLIENT_ID
     })
 
-    this.auth2.then(() => {
-      console.log('on init');
+    this.auth2.then((response) => {
       this.setState({
         isSignedIn: this.auth2.isSignedIn.get(),
+        userProfile: response.currentUser.Ab.w3
       });
     });
   });    
